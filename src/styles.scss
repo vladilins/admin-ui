@@ -6,10 +6,14 @@ body {
 }
 
 .bold {
-  font: 700;
+  font-weight: 700;
 }
 
-.black {
-  font: 900;
+.italic {
+  font-weight: 900;
   font-style: italic;
+}
+
+.sbf-w {
+  color: rgb(255, 255, 255);
 }
