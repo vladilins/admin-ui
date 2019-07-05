@@ -1,0 +1,13 @@
+.container {
+    display: grid;
+}
+
+.left {
+    grid-column: 1;
+    background-color: rgb(68, 68, 68);
+}
+
+.right {
+    grid-column: 2;
+    background-color: rgb(247, 245, 242);
+}
