@@ -1,3 +1,51 @@
 <div class="container">
   <h1 class="bold header">Lägg till ny kampanj</h1>
+
+  <div class="form">
+    <form [formGroup]="form">
+      <label>
+        <h4 class="bold">Kampanj rubrik</h4>
+        <input
+          type="text"
+          formControlName="name"
+          class="form__input"
+          [class.error]="nameControlInvalid"
+        />
+        <div class="form__error" *ngIf="nameControlInvalid">
+          <p>Must be filled</p>
+        </div>
+      </label>
+
+      <ng-content></ng-content>
+
+      <!-- <div class="form__actions">
+        <button
+          type="button"
+          class="btn btn__ok"
+          *ngIf="!exists"
+          (click)="createPizza(form)"
+        >
+          Create Pizza
+        </button>
+
+        <button
+          type="button"
+          class="btn btn__ok"
+          *ngIf="exists"
+          (click)="updatePizza(form)"
+        >
+          Save changes
+        </button>
+
+        <button
+          type="button"
+          class="btn btn__warning"
+          *ngIf="exists"
+          (click)="removePizza(form)"
+        >
+          Delete Pizza
+        </button>
+      </div> -->
+    </form>
+  </div>
 </div>

@@ -3,3 +3,66 @@
   width: 500px;
   color: rgb(72, 72, 72);
 }
+
+.form {
+  ::ng-deep pizza-display {
+    margin: 0 0 35px;
+  }
+  label {
+    margin: 0 0 35px;
+    display: block;
+    h4 {
+      margin: 0 0 15px;
+      font-size: 18px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+  }
+  &__error {
+    padding: 5px 10px;
+    border-radius: 0 0 4px 4px;
+    display: flex;
+    align-items: center;
+    background: #aa141b;
+    border: 1px solid #b54846;
+    width: 100%;
+    color: #fff;
+    p {
+      font: {
+        size: 14px;
+      }
+      margin: 0;
+    }
+  }
+  &__input {
+    height: 28px;
+    border: 0;
+    margin: 0;
+    padding: 10px;
+    outline: 0;
+    width: 100%;
+    border-radius: 4px;
+    font-size: 20px;
+    background: white;
+    border: 1px solid transparent;
+    box-shadow: inset 0px 0px 0px 1px rgb(204, 204, 204);
+    &.error {
+      border-radius: 4px 4px 0 0;
+      border-color: #b54846;
+    }
+  }
+  &__actions {
+    margin: 35px 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    button {
+      &:last-child {
+        margin-left: auto;
+      }
+    }
+  }
+  &__list {
+    margin: -20px 0 0;
+  }
+}
