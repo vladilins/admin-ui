@@ -1,15 +1,55 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-ads',
-  templateUrl: './ads.component.html',
-  styleUrls: ['./ads.component.scss']
+  selector: "app-ads",
+  templateUrl: "./ads.component.html",
+  styleUrls: ["./ads.component.scss"]
 })
 export class AdsComponent implements OnInit {
+  ads = [
+    {
+      id: 1,
+      title: "rallyshop.se",
+      text: "25% rabbat på drifting däck",
+      link: "www.com",
+      image: "image",
+      place: 1
+    },
+    {
+      id: 1,
+      title: "rallyshop.se",
+      text: "25% rabbat på drifting däck",
+      link: "www.com",
+      image: "image",
+      place: 1
+    },
+    {
+      id: 1,
+      title: "rallyshop.se",
+      text: "25% rabbat på drifting däck",
+      link: "www.com",
+      image: "image",
+      place: 1
+    },
+    {
+      id: 1,
+      title: "rallyshop.se",
+      text: "25% rabbat på drifting däck",
+      link: "www.com",
+      image: "image",
+      place: 1
+    },
+    {
+      id: 1,
+      title: "rallyshop.se",
+      text: "25% rabbat på drifting däck",
+      link: "www.com",
+      image: "image",
+      place: 1
+    }
+  ];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
