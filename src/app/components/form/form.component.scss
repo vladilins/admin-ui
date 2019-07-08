@@ -94,3 +94,34 @@
     margin: -20px 0 0;
   }
 }
+
+.select-style {
+  border: 1px solid #ccc;
+  width: 120px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.select-style select {
+  padding: 10px;
+  width: 100%;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  font-size: 18px;
+
+  background-image: url("../../../assets/select.png");
+  background-repeat: no-repeat, repeat;
+  background-position: right 0.7em top 50%, 0 0;
+  background-size: 20px auto, 100%;
+}
+
+.select-style select:focus {
+  outline: none;
+}
+
+.select-style option {
+}

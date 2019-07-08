@@ -36,41 +36,23 @@
             </label>
             <div class="form__upload">
                 <button (click)="openFileBrowser($event)" class="form__upload-btn">Browse</button>
-                <input id="imgName" [class.error]="nameControlInvalid" readonly class="form__input" formcontrolname="link" type="text" placeholder="{{fileName}}"/>
+                <input [class.error]="nameControlInvalid" [placeholder]="fileName ? fileName : 'Choose a file'" class="form__input" formcontrolname="link" id="imgName" readonly type="text"/>
             </div>
             <input (change)="imageChange($event)" accept=".gif,.jpg,.jpeg,.png" id="imageBrowser" style="display: none;" type="file">
 
+            <h4 class="bold">VÄLJ PLACERING</h4>
 
-        <!-- <ng-content></ng-content> -->
+            <div class="select-style">
+                <select>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                </select>
+            </div>
 
-            <!-- <div class="form__actions">
-                                                                                                                                                                                                                                                                                                                                <button
-                                                                                                                                                                                                                                                                                                                                  type="button"
-                                                                                                                                                                                                                                                                                                                                  class="btn btn__ok"
-                                                                                                                                                                                                                                                                                                                                  *ngIf="!exists"
-                                                                                                                                                                                                                                                                                                                                  (click)="createPizza(form)"
-                                                                                                                                                                                                                                                                                                                                >
-                                                                                                                                                                                                                                                                                                                                  Create Pizza
-                                                                                                                                                                                                                                                                                                                                </button>
-                                                                                                                                                                                                                                                                                                                        
-                                                                                                                                                                                                                                                                                                                                <button
-                                                                                                                                                                                                                                                                                                                                  type="button"
-                                                                                                                                                                                                                                                                                                                                  class="btn btn__ok"
-                                                                                                                                                                                                                                                                                                                                  *ngIf="exists"
-                                                                                                                                                                                                                                                                                                                                  (click)="updatePizza(form)"
-                                                                                                                                                                                                                                                                                                                                >
-                                                                                                                                                                                                                                                                                                                                  Save changes
-                                                                                                                                                                                                                                                                                                                                </button>
-                                                                                                                                                                                                                                                                                                                        
-                                                                                                                                                                                                                                                                                                                                <button
-                                                                                                                                                                                                                                                                                                                                  type="button"
-                                                                                                                                                                                                                                                                                                                                  class="btn btn__warning"
-                                                                                                                                                                                                                                                                                                                                  *ngIf="exists"
-                                                                                                                                                                                                                                                                                                                                  (click)="removePizza(form)"
-                                                                                                                                                                                                                                                                                                                                >
-                                                                                                                                                                                                                                                                                                                                  Delete Pizza
-                                                                                                                                                                                                                                                                                                                                </button>
-                                                                                                                                                                                                                                                                                                                              </div> -->
+            <!-- <ng-content></ng-content> -->
+
         </form>
     </div>
 </div>
