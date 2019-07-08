@@ -62,12 +62,16 @@
   }
 
   &__upload-btn {
+    border: 1px solid gray;
     height: 48px;
     width: 240px;
     background-color: #f7f5f2;
     font-size: 15px;
     outline: none;
     margin-right: 30px;
+    border-radius: 2px;
+    letter-spacing: 1px;
+    color: rgb(72, 72, 72);
   }
 
   &__upload-btn:hover {
@@ -77,6 +81,26 @@
   #imgName {
     margin-right: -20px;
     width: 669px;
+  }
+
+  &__submit {
+    display: flex;
+    justify-content: space-between;
+
+    .btn {
+      margin-right: -20px;
+      width: 150px;
+      background-color: rgb(68, 68, 68);
+      color: white;
+      outline: none;
+      font-size: 15px;
+      padding: 20px;
+      border-radius: 4px;
+    }
+
+    .btn:hover {
+      cursor: pointer;
+    }
   }
 
   &__actions {
@@ -96,21 +120,25 @@
 }
 
 .select-style {
-  border: 1px solid #ccc;
+  border: 1px solid gray;
   width: 120px;
   border-radius: 3px;
   overflow: hidden;
+  max-height: 48px;
+  height: 48px;
 }
 
 .select-style select {
-  padding: 10px;
+  padding: 14px;
   width: 100%;
   border: none;
   box-shadow: none;
   background: transparent;
+  border-radius: 2px;
 
   -webkit-appearance: none;
   -moz-appearance: none;
+  appearance: none;
   font-size: 18px;
 
   background-image: url("../../../assets/select.png");
@@ -123,5 +151,8 @@
   outline: none;
 }
 
-.select-style option {
+.select-style select option {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
