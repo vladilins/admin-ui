@@ -17,6 +17,7 @@ import {
 } from "@angular/forms";
 
 import { map } from "rxjs/operators";
+import { Add } from "src/app/models/add";
 
 @Component({
   selector: "app-form",
@@ -28,11 +29,11 @@ export class FormComponent {
 
   fileName;
 
-  // @Input() pizza: Pizza;
+  @Input() add: Add;
   // @Input() toppings: Topping[];
 
   // @Output() selected = new EventEmitter<Pizza>();
-  // @Output() create = new EventEmitter<Pizza>();
+  @Output() create = new EventEmitter<Add>();
   // @Output() update = new EventEmitter<Pizza>();
   // @Output() remove = new EventEmitter<Pizza>();
 
@@ -83,12 +84,13 @@ export class FormComponent {
   //     .subscribe(value => this.selected.emit(value));
   // }
 
-  // createPizza(form: FormGroup) {
-  //   const { value, valid } = form;
-  //   if (valid) {
-  //     this.create.emit(value);
-  //   }
-  // }
+  createAdd(form: FormGroup) {
+    const { value, valid } = form;
+    if (valid) {
+      this.create.emit(value);
+      console.log(form);
+    }
+  }
 
   // updatePizza(form: FormGroup) {
   //   const { value, valid, touched } = form;
