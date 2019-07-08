@@ -3,11 +3,7 @@
 
   <div class="add" *ngFor="let add of ads">
     <div class="card">
-      <img
-        class="card-img"
-        src="https://blog.hubspot.com/hubfs/subliminal-advertising.jpg"
-        alt=""
-      />
+      <img class="card-img" src="{{ add.image }}" alt="card image" />
       <div class="card-body">
         <div class="card-text">
           <p class="italic title">{{ add.title }}</p>

@@ -12,7 +12,7 @@ export class AdsComponent implements OnInit {
       title: "rallyshop.se",
       text: "25% rabbat på drifting däck",
       link: "www.com",
-      image: "image",
+      image: "https://blog.hubspot.com/hubfs/subliminal-advertising.jpg",
       place: 1
     },
     {
@@ -20,7 +20,7 @@ export class AdsComponent implements OnInit {
       title: "rallyshop.se",
       text: "25% rabbat på drifting däck",
       link: "www.com",
-      image: "image",
+      image: "https://blog.hubspot.com/hubfs/subliminal-advertising.jpg",
       place: 1
     },
     {
@@ -28,7 +28,7 @@ export class AdsComponent implements OnInit {
       title: "rallyshop.se",
       text: "25% rabbat på drifting däck",
       link: "www.com",
-      image: "image",
+      image: "https://blog.hubspot.com/hubfs/subliminal-advertising.jpg",
       place: 1
     },
     {
@@ -36,7 +36,7 @@ export class AdsComponent implements OnInit {
       title: "rallyshop.se",
       text: "25% rabbat på drifting däck",
       link: "www.com",
-      image: "image",
+      image: "https://blog.hubspot.com/hubfs/subliminal-advertising.jpg",
       place: 1
     },
     {
@@ -44,7 +44,7 @@ export class AdsComponent implements OnInit {
       title: "rallyshop.se",
       text: "25% rabbat på drifting däck",
       link: "www.com",
-      image: "image",
+      image: "https://blog.hubspot.com/hubfs/subliminal-advertising.jpg",
       place: 1
     }
   ];

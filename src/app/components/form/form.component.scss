@@ -8,19 +8,25 @@
   height: 157px;
 }
 
+.mt {
+  margin-top: 35px !important;
+}
+
 .form {
   ::ng-deep pizza-display {
     margin: 0 0 35px;
   }
+
+  h4 {
+    margin: 0 0 15px;
+    font-size: 16px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
   label {
     margin: 0 0 35px;
     display: block;
-    h4 {
-      margin: 0 0 15px;
-      font-size: 18px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
   }
   &__error {
     padding: 5px 10px;
@@ -58,7 +64,7 @@
 
   &__upload {
     display: flex;
-    margin-top: -10px;
+    margin-top: -20px;
   }
 
   &__upload-btn {
@@ -91,11 +97,12 @@
       margin-right: -20px;
       width: 150px;
       background-color: rgb(68, 68, 68);
-      color: white;
+      color: #fff;
       outline: none;
       font-size: 15px;
       padding: 20px;
       border-radius: 4px;
+      letter-spacing: 1px;
     }
 
     .btn:hover {
