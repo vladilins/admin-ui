@@ -2,68 +2,92 @@
   <h1 class="bold header">Lägg till ny kampanj</h1>
 
   <div class="form">
-    <form [formGroup]="form">
+    <form [formGroup]="form" (ngSubmit)="createAdd(form)">
       <label>
         <h4 class="bold">Kampanj rubrik</h4>
         <input
-          [class.error]="nameControlInvalid"
+          [class.error]="
+            nameControl.invalid &&
+            (nameControl.dirty || nameControl.touched || submitted)
+          "
           class="form__input"
-          formcontrolname="name"
+          formControlName="name"
           type="text"
         />
-        <div *ngIf="nameControlInvalid" class="form__error">
-          <p>Must be filled</p>
+        <div
+          *ngIf="
+            nameControl.invalid &&
+            (nameControl.dirty || nameControl.touched || submitted)
+          "
+          class="form__error"
+        >
+          <p>Måste fyllas</p>
         </div>
       </label>
 
       <label>
         <h4 class="bold">Text</h4>
         <textarea
-          [class.error]="nameControlInvalid"
+          [class.error]="
+            textControl.invalid &&
+            (textControl.dirty || textControl.touched || submitted)
+          "
           class="form__input"
-          formcontrolname="text"
+          formControlName="text"
           id="textarea"
           type="text"
         ></textarea>
-        <div *ngIf="textControlInvalid" class="form__error">
-          <p>Must be filled</p>
+        <div
+          *ngIf="
+            textControl.invalid &&
+            (textControl.dirty || textControl.touched || submitted)
+          "
+          class="form__error"
+        >
+          <p>Måste fyllas</p>
         </div>
       </label>
 
       <label>
         <h4 class="bold">Länk</h4>
         <input
-          [class.error]="nameControlInvalid"
+          [class.error]="
+            linkControl.invalid &&
+            (linkControl.dirty || linkControl.touched || submitted)
+          "
           class="form__input"
-          formcontrolname="link"
+          formControlName="link"
           type="text"
         />
-        <div *ngIf="linkControlInvalid" class="form__error">
-          <p>Must be filled</p>
+        <div
+          *ngIf="
+            linkControl.invalid &&
+            (linkControl.dirty || linkControl.touched || submitted)
+          "
+          class="form__error"
+        >
+          <p>Måste fyllas</p>
         </div>
       </label>
 
       <label>
         <h4 class="bold">LADDA UPP BILD</h4>
-        <!-- <input [class.error]="nameControlInvalid" class="form__input" formcontrolname="link" type="text"/> -->
-        <div *ngIf="linkControlInvalid" class="form__error">
-          <p>Must be filled</p>
-        </div>
       </label>
       <div class="form__upload">
         <button (click)="openFileBrowser($event)" class="form__upload-btn">
           Browse
         </button>
         <input
-          [class.error]="nameControlInvalid"
-          [placeholder]="fileName ? fileName : 'Choose a file'"
+          [class.error]="!fileName && submitted"
+          placeholder="Välj en fil"
           class="form__input"
-          formcontrolname="link"
           id="imgName"
           readonly
           type="text"
+          [value]="fileName ? fileName : ''"
         />
       </div>
+
       <input
         (change)="imageChange($event)"
         accept=".gif,.jpg,.jpeg,.png"
@@ -76,15 +100,14 @@
 
       <div class="form__submit">
         <div class="select-style">
-          <select>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
+          <select formControlName="place">
+            <option *ngFor="let place of places" [ngValue]="place">
+              {{ place }}
+            </option>
           </select>
         </div>
 
-        <button type="button" class="btn bold" (click)="createAdd(form)">
+        <button type="submit" class="btn bold">
           PUBLICERA
         </button>
       </div>

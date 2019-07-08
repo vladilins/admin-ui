@@ -26,8 +26,11 @@ import { Add } from "src/app/models/add";
 })
 export class FormComponent {
   exists = false;
+  submitted = false;
 
   fileName;
+  places = [1, 2, 3, 4];
+  default = 1;
 
   @Input() add: Add;
   // @Input() toppings: Topping[];
@@ -43,17 +46,35 @@ export class FormComponent {
   }
 
   form = this.fb.group({
-    name: ["", Validators.required]
+    name: ["", Validators.required],
+    text: ["", Validators.required],
+    link: ["", Validators.required],
+    image: ["", Validators.required],
+    place: ["", Validators.required]
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {
+    this.form.controls["place"].setValue(this.default, { onlySelf: true });
+  }
 
   get nameControl() {
     return this.form.get("name") as FormControl;
   }
 
-  get nameControlInvalid() {
-    return this.nameControl.hasError("required") && this.nameControl.touched;
+  get textControl() {
+    return this.form.get("text") as FormControl;
+  }
+
+  get linkControl() {
+    return this.form.get("link") as FormControl;
+  }
+
+  get imageControl() {
+    return this.form.get("image") as FormControl;
+  }
+
+  get placeControl() {
+    return this.form.get("place") as FormControl;
   }
 
   openFileBrowser(event) {
@@ -71,6 +92,11 @@ export class FormComponent {
     inp.click();
   }
 
+  imageChange(event) {
+    const fileList: FileList = event.target.files;
+    console.log(fileList[0]);
+  }
+
   // ngOnChanges(changes: SimpleChanges) {
   //   if (this.pizza && this.pizza.id) {
   //     this.exists = true;
@@ -85,10 +111,10 @@ export class FormComponent {
   // }
 
   createAdd(form: FormGroup) {
+    this.submitted = true;
     const { value, valid } = form;
     if (valid) {
       this.create.emit(value);
-      console.log(form);
     }
   }
 

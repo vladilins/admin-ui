@@ -6,6 +6,11 @@
 
 #textarea {
   height: 157px;
+  margin-bottom: -5px;
+}
+
+#option {
+  font-size: 12px;
 }
 
 .mt {
@@ -34,7 +39,7 @@
     display: flex;
     align-items: center;
     background: #aa141b;
-    border: 1px solid #b54846;
+    border: 1px solid #aa141b;
     width: 100%;
     color: #fff;
     p {
@@ -58,7 +63,10 @@
     box-shadow: inset 0px 0px 0px 1px rgb(204, 204, 204);
     &.error {
       border-radius: 4px 4px 0 0;
-      border-color: #b54846;
+      border-color: #aa141b;
+    }
+    &.error:last-child {
+      border-radius: 4px;
     }
   }
 

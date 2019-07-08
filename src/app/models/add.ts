@@ -1,6 +1,6 @@
 export interface Add {
-  id?: number;
-  title?: string;
+  id: number;
+  name: string;
   text: string;
   link: string;
   image: string;
