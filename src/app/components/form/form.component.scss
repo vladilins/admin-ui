@@ -4,6 +4,10 @@
   color: rgb(72, 72, 72);
 }
 
+#textarea {
+  height: 157px;
+}
+
 .form {
   ::ng-deep pizza-display {
     margin: 0 0 35px;
@@ -51,6 +55,30 @@
       border-color: #b54846;
     }
   }
+
+  &__upload {
+    display: flex;
+    margin-top: -10px;
+  }
+
+  &__upload-btn {
+    height: 48px;
+    width: 240px;
+    background-color: #f7f5f2;
+    font-size: 15px;
+    outline: none;
+    margin-right: 30px;
+  }
+
+  &__upload-btn:hover {
+    cursor: pointer;
+  }
+
+  #imgName {
+    margin-right: -20px;
+    width: 669px;
+  }
+
   &__actions {
     margin: 35px 0 0;
     display: flex;

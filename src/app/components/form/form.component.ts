@@ -26,6 +26,8 @@ import { map } from "rxjs/operators";
 export class FormComponent {
   exists = false;
 
+  fileName;
+
   // @Input() pizza: Pizza;
   // @Input() toppings: Topping[];
 
@@ -34,9 +36,13 @@ export class FormComponent {
   // @Output() update = new EventEmitter<Pizza>();
   // @Output() remove = new EventEmitter<Pizza>();
 
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+  }
+
   form = this.fb.group({
-    name: ["", Validators.required],
-    toppings: [[]]
+    name: ["", Validators.required]
   });
 
   constructor(private fb: FormBuilder) {}
@@ -47,6 +53,21 @@ export class FormComponent {
 
   get nameControlInvalid() {
     return this.nameControl.hasError("required") && this.nameControl.touched;
+  }
+
+  openFileBrowser(event) {
+    event.preventDefault();
+    const inp: HTMLElement = document.getElementById(
+      "imageBrowser"
+    ) as HTMLElement;
+    const input = <HTMLInputElement>document.getElementById("imageBrowser");
+    input.addEventListener("change", () => {
+      const name = input.value.split(/\\|\//).pop();
+      const truncated = name.length > 20 ? name.substr(name.length - 20) : name;
+
+      this.fileName = truncated;
+    });
+    inp.click();
   }
 
   // ngOnChanges(changes: SimpleChanges) {
