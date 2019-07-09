@@ -4,11 +4,19 @@
 }
 
 .links {
-  color: #ffffff;
   float: right;
   margin-right: 20px;
   margin-top: 15px;
+}
+
+.link {
+  color: #ffffff;
   text-transform: uppercase;
   font-size: 15px;
   letter-spacing: 1px;
+  text-decoration: none;
+}
+
+.mr {
+  margin-right: 10px;
 }
