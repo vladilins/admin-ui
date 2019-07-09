@@ -1,6 +1,6 @@
 <nav class="nav">
     <div class="links">
-        <a *ngIf="login">Login</a>
+        <a [routerLink]="[ '/login' ]" routerlinkactive="active">Login</a>
         <a>Logout</a>
     </div>
 </nav>
