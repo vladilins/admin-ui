@@ -18,6 +18,7 @@ import {
 
 import { map } from "rxjs/operators";
 import { Add } from "src/app/models/add";
+import { AdsService } from "src/app/services/ads.service";
 
 @Component({
   selector: "app-form",
@@ -28,33 +29,26 @@ export class FormComponent {
   exists = false;
   submitted = false;
 
+  add: Add;
+
   fileName;
   places = [1, 2, 3, 4];
   default = 1;
-
-  @Input() add: Add;
-  // @Input() toppings: Topping[];
-
-  // @Output() selected = new EventEmitter<Pizza>();
-  @Output() create = new EventEmitter<Add>();
-  // @Output() update = new EventEmitter<Pizza>();
-  // @Output() remove = new EventEmitter<Pizza>();
-
-  ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-  }
 
   form = this.fb.group({
     name: ["", Validators.required],
     text: ["", Validators.required],
     link: ["", Validators.required],
-    image: ["", Validators.required],
+    image: [null, Validators.required],
     place: ["", Validators.required]
   });
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private adsService: AdsService) {
     this.form.controls["place"].setValue(this.default, { onlySelf: true });
+  }
+
+  ngOnInit(): void {
+    this.adsService.currentAds.subscribe(add => (this.add = add));
   }
 
   get nameControl() {
@@ -97,36 +91,24 @@ export class FormComponent {
     console.log(fileList[0]);
   }
 
-  // ngOnChanges(changes: SimpleChanges) {
-  //   if (this.pizza && this.pizza.id) {
-  //     this.exists = true;
-  //     this.form.patchValue(this.pizza);
-  //   }
-  //   this.form
-  //     .get("toppings")
-  //     .valueChanges.pipe(
-  //       map(toppings => toppings.map((topping: Topping) => topping.id))
-  //     )
-  //     .subscribe(value => this.selected.emit(value));
-  // }
-
   createAdd(form: FormGroup) {
     this.submitted = true;
     const { value, valid } = form;
     if (valid) {
-      this.create.emit(value);
+      this.adsService.newAdd(this.add);
+      console.log(form.value);
     }
   }
 
-  // updatePizza(form: FormGroup) {
+  // updateAdd(form: FormGroup) {
   //   const { value, valid, touched } = form;
   //   if (touched && valid) {
-  //     this.update.emit({ ...this.pizza, ...value });
+  //     this.update.emit({ ...this.add, ...value });
   //   }
   // }
 
-  // removePizza(form: FormGroup) {
+  // removeAdd(form: FormGroup) {
   //   const { value } = form;
-  //   this.remove.emit({ ...this.pizza, ...value });
+  //   this.remove.emit({ ...this.add, ...value });
   // }
 }

@@ -1,20 +1,20 @@
 <div class="container">
-  <h1 class="bold sbf-w header">Aktiva kampanjer</h1>
+    <h1 class="bold sbf-w header">Aktiva kampanjer</h1>
 
-  <div class="add" *ngFor="let add of ads">
-    <div class="card">
-      <img class="card-img" src="{{ add.image }}" alt="card image" />
-      <div class="card-body">
-        <div class="card-text">
-          <p class="italic title">{{ add.title }}</p>
-          <p class="text">{{ add.text }}</p>
+    <div *ngFor="let add of ads" class="add">
+        <div class="card">
+            <img class="card-img" src="{{ add.image }}" alt="card image"/>
+            <div class="card-body">
+                <div class="card-text">
+                    <p class="italic title">{{ add.title }}</p>
+                    <p class="text">{{ add.text }}</p>
+                </div>
+            </div>
         </div>
-      </div>
+        <div class="icons">
+            <img alt="moveUp" class="icon mr-r " src="assets/moveUp.png"/>
+            <img alt="moveDown" class="mr-r icon" src="assets/moveDown.png"/>
+            <img alt="delete" class="icon" src="assets/delete.png"/>
+        </div>
     </div>
-    <div class="icons">
-      <img class="icon mr-r " src="assets/moveUp.png" alt="moveUp" />
-      <img class="mr-r icon" src="assets/moveDown.png" alt="moveDown" />
-      <img class="icon" src="assets/delete.png" alt="delete" />
-    </div>
-  </div>
 </div>
