@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Validators, FormBuilder, FormControl, FormGroup } from "@angular/forms";
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: "app-login",
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
     password: ["", Validators.required]
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private authService: AuthService) {}
 
   ngOnInit(): void {}
 
@@ -31,6 +32,9 @@ export class LoginComponent implements OnInit {
     const { value, valid } = form;
     if (valid) {
       console.log(form.value);
+      this.authService.login(value.username, value.password).subscribe(data =>{
+        console.log(data);
+      })
     }
   }
 }
