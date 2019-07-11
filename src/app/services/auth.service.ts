@@ -2,14 +2,18 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Router} from '@angular/router';
-// import {UrlService} from './url.service';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  TOKEN_KEY = 't';
+
   apiUrl = environment.apiUrl;
+
+  private userToken: string;
 
   xClientInfoHeader = {
     appVersion : "1.0.0",
@@ -34,6 +38,43 @@ export class AuthService {
       password: password
     }
 
-    return this.httpClient.post(endpoint, httpParams, this.httpOptions)
+    return this.httpClient.post(endpoint, httpParams, this.httpOptions).pipe(
+      map(token => {
+        this.userToken = token.toString();
+        this.storeToken();
+      })
+    )
   }
+
+  logoutAndRedirect(router: Router) {
+    this.logout();
+    const url = '/login'
+    router.navigate([url]);
+  }
+
+  logout() {
+    this.userToken = undefined;
+    this.clearToken();
+  }
+
+  getUserToken() {
+    return this.userToken;
+  }
+
+  isLoggedIn() {
+    return typeof this.userToken !== 'undefined';
+  }
+
+  storeToken() {
+    sessionStorage.setItem(this.TOKEN_KEY, this.getUserToken());
+  }
+
+  clearToken() {
+    sessionStorage.removeItem(this.TOKEN_KEY);
+  }
+
+  hasStoredToken() {
+    return sessionStorage.getItem(this.TOKEN_KEY) && sessionStorage.getItem(this.TOKEN_KEY).length > 0;
+  }
+
 }

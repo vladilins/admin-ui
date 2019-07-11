@@ -11,6 +11,9 @@ import { LoginComponent } from "./components/login/login.component";
 import { HeaderComponent } from "./components/header/header.component";
 import { AdminComponent } from "./containers/admin/admin.component";
 import { AppRoutingModule } from "./routing/routing.module";
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './guards/auth.guard';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,8 @@ import { AppRoutingModule } from "./routing/routing.module";
     AdsComponent,
     LoginComponent,
     HeaderComponent,
-    AdminComponent
+    AdminComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +31,7 @@ import { AppRoutingModule } from "./routing/routing.module";
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [AdsService],
+  providers: [AdsService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
