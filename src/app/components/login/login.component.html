@@ -6,7 +6,7 @@
       <label>
         <h4 class="bold">Användarnamn</h4>
         <input
-          [class.error]="usernameControl.invalid && submitted"
+          [class.error]="usernameControl.invalid && submitted || error"
           class="form__input"
           formControlName="username"
           type="text"
@@ -19,13 +19,16 @@
       <label>
         <h4 class="bold">Lösenord</h4>
         <input
-          [class.error]="passwordControl.invalid && submitted"
+          [class.error]="passwordControl.invalid && submitted || error"
           class="form__input"
           formControlName="password"
           type="password"
         />
         <div *ngIf="passwordControl.invalid && submitted" class="form__error">
           <p>Lösenord krävs</p>
+        </div>
+        <div *ngIf="error" class="form__error">
+          <p>Fel lösenord eller användarnamn</p>
         </div>
       </label>
 

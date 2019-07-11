@@ -15,6 +15,7 @@ import { Router } from "@angular/router";
 })
 export class LoginComponent implements OnInit {
   submitted = false;
+  error = false;
 
   form = this.fb.group({
     username: ["", Validators.required],
@@ -47,7 +48,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate([url]);
         },
         error => {
-          console.log(error);
+          this.error = true;
         }
       );
     }
