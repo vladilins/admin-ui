@@ -1,6 +1,8 @@
 <nav class="nav">
+    
     <div
         class="links">
+        <a class="logo" [routerLink]="[ '/' ]">SBF</a>
         <!-- <a [routerLink]="[ '/login' ]" class="link mr">Login</a> -->
         <a (click)="logout()" *ngIf="isLogedIn()" [routerLink]="[ '/' ]" class="link">Logout</a>
     </div>

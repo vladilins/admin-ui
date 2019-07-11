@@ -3,10 +3,28 @@
   background-color: #222222;
 }
 
+.sbf {
+  padding-top: 10px;
+  padding-left: 20px;
+}
+
+.sbf:hover{
+  cursor: pointer;
+}
+
+.logo {
+  color: #ffffff;
+  text-transform: uppercase;
+  font-size: 20px;
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+
 .links {
-  float: right;
-  margin-right: 20px;
-  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
 }
 
 .link {
