@@ -27,7 +27,7 @@
         <div *ngIf="passwordControl.invalid && submitted" class="form__error">
           <p>Lösenord krävs</p>
         </div>
-        <div *ngIf="error" class="form__error">
+        <div *ngIf="error && !(passwordControl.invalid && submitted)" class="form__error">
           <p>Fel lösenord eller användarnamn</p>
         </div>
       </label>
