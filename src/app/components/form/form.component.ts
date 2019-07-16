@@ -2,10 +2,8 @@ import {
   Component,
   Input,
   Output,
-  EventEmitter,
   OnChanges,
   SimpleChanges,
-  ChangeDetectionStrategy,
   OnInit
 } from "@angular/core";
 import {
@@ -25,7 +23,7 @@ import { AdsService } from "src/app/services/ads.service";
   templateUrl: "./form.component.html",
   styleUrls: ["./form.component.scss"]
 })
-export class FormComponent {
+export class FormComponent implements OnInit {
   exists = false;
   submitted = false;
 
@@ -47,9 +45,7 @@ export class FormComponent {
     this.form.controls["place"].setValue(this.default, { onlySelf: true });
   }
 
-  ngOnInit(): void {
-    // this.adsService.currentAds.subscribe(add => (this.add = add));
-  }
+  ngOnInit(): void {}
 
   get nameControl() {
     return this.form.get("title") as FormControl;
@@ -97,9 +93,8 @@ export class FormComponent {
     this.add = value
 
     if (valid) {
-      this.adsService.addAdd(this.add).subscribe(
+      this.adsService.newAdd(this.add).subscribe(
         data => {
-          console.log("success");
           this.form.reset();
           this.submitted = false;
         },
@@ -109,16 +104,4 @@ export class FormComponent {
       );
     }
   }
-
-  // updateAdd(form: FormGroup) {
-  //   const { value, valid, touched } = form;
-  //   if (touched && valid) {
-  //     this.update.emit({ ...this.add, ...value });
-  //   }
-  // }
-
-  // removeAdd(form: FormGroup) {
-  //   const { value } = form;
-  //   this.remove.emit({ ...this.add, ...value });
-  // }
 }

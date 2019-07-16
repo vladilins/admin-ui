@@ -11,9 +11,9 @@ import { AuthService } from './auth.service';
 })
 export class AdsService {
 
-   apiUrl = environment.apiUrl
+  private apiUrl = environment.apiUrl
 
-   xClientInfoHeader = {
+  private xClientInfoHeader = {
     appVersion: "1.0.0",
     os: "iOS",
     osVersion: "12.1",
@@ -21,42 +21,27 @@ export class AdsService {
     lang: "sv"
   };
 
-   httpOptions = {
-    // headers: new HttpHeaders({
-    //   "X-ClientInfo": JSON.stringify(this.xClientInfoHeader),
-    //   "Authorization" : this.getAccessToken()
-    // })
+  private httpOptions = {
     headers: new HttpHeaders()
         .append("X-ClientInfo", JSON.stringify(this.xClientInfoHeader))
         .append('Authorization', 'Bearer ' + this.getAccessToken()),
   };
 
-  private ads: Add;
-  private adsSource = new BehaviorSubject(this.ads);
-  currentAds = this.adsSource.asObservable();
-
   constructor(private httpClient: HttpClient, private authService: AuthService) {}
 
   loadAds(): Observable<any>{
     const endpoint = this.apiUrl + '/advertisements';
-    console.log(this.httpOptions);
     
     return this.httpClient.get<Add[]>(endpoint, this.httpOptions);
   }
 
-  addAdd(add: Add) {
+  newAdd(add: Add) {
     const endpoint = this.apiUrl + '/advertisements';
 
     return this.httpClient.post(endpoint, add, this.httpOptions)
   }
 
-  newAdd(add: Add) {
-    this.adsSource.next(add);
-  }
-
   getAccessToken(){
     return sessionStorage.getItem(this.authService.TOKEN_KEY)
   }
-
-
 }

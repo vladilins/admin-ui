@@ -40,7 +40,7 @@ export class AuthService {
 
     return this.httpClient.post(endpoint, httpParams, this.httpOptions).pipe(
       map(token => {
-        this.userToken = (token as TokensObj).tokens.access.token;
+        this.userToken = (token as TokensObj).tokens.access.token.toString();
         this.storeToken();
       })
     );
