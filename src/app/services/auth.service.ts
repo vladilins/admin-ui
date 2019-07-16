@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { Router } from "@angular/router";
 import { map } from "rxjs/operators";
+import { TokensObj } from '../models/tokens';
 
 @Injectable({
   providedIn: "root"
@@ -12,7 +13,7 @@ export class AuthService {
 
   apiUrl = environment.apiUrl;
 
-  private userToken: string;
+  private userToken;
 
   xClientInfoHeader = {
     appVersion: "1.0.0",
@@ -39,7 +40,7 @@ export class AuthService {
 
     return this.httpClient.post(endpoint, httpParams, this.httpOptions).pipe(
       map(token => {
-        this.userToken = token.toString();
+        this.userToken = (token as TokensObj).tokens.access.token;
         this.storeToken();
       })
     );

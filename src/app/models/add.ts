@@ -1,8 +1,7 @@
 export interface Add {
   id: number;
-  name: string;
+  imageUrl: string;
   text: string;
-  link: string;
-  image: string;
-  place: number;
+  title: string;
+  url: string;
 }
