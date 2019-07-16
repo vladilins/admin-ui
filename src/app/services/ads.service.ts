@@ -44,6 +44,12 @@ export class AdsService {
     return this.httpClient.get<Add[]>(endpoint, this.httpOptions);
   }
 
+  addAdd(add: Add) {
+    const endpoint = this.apiUrl + '/advertisements';
+
+    return this.httpClient.post(endpoint, add, this.httpOptions)
+  }
+
   newAdd(add: Add) {
     this.adsSource.next(add);
   }

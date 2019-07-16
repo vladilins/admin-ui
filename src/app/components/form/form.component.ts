@@ -36,10 +36,10 @@ export class FormComponent {
   default = 1;
 
   form = this.fb.group({
-    name: ["", Validators.required],
+    title: ["", Validators.required],
     text: ["", Validators.required],
-    link: ["", Validators.required],
-    image: [null, Validators.required],
+    url: ["", Validators.required],
+    imageUrl: [null, Validators.required],
     place: ["", Validators.required]
   });
 
@@ -48,11 +48,11 @@ export class FormComponent {
   }
 
   ngOnInit(): void {
-    this.adsService.currentAds.subscribe(add => (this.add = add));
+    // this.adsService.currentAds.subscribe(add => (this.add = add));
   }
 
   get nameControl() {
-    return this.form.get("name") as FormControl;
+    return this.form.get("title") as FormControl;
   }
 
   get textControl() {
@@ -60,11 +60,11 @@ export class FormComponent {
   }
 
   get linkControl() {
-    return this.form.get("link") as FormControl;
+    return this.form.get("url") as FormControl;
   }
 
   get imageControl() {
-    return this.form.get("image") as FormControl;
+    return this.form.get("imageUrl") as FormControl;
   }
 
   get placeControl() {
@@ -78,8 +78,8 @@ export class FormComponent {
     ) as HTMLElement;
     const input = <HTMLInputElement>document.getElementById("imageBrowser");
     input.addEventListener("change", () => {
-      const name = input.value.split(/\\|\//).pop();
-      const truncated = name.length > 20 ? name.substr(name.length - 20) : name;
+      const title = input.value.split(/\\|\//).pop();
+      const truncated = title.length > 20 ? title.substr(title.length - 20) : title;
 
       this.fileName = truncated;
     });
@@ -94,9 +94,19 @@ export class FormComponent {
   createAdd(form: FormGroup) {
     this.submitted = true;
     const { value, valid } = form;
+    this.add = value
+
     if (valid) {
-      this.adsService.newAdd(this.add);
-      console.log(form.value);
+      this.adsService.addAdd(this.add).subscribe(
+        data => {
+          console.log("success");
+          this.form.reset();
+          this.submitted = false;
+        },
+        error => {
+          console.log(error);
+        }
+      );
     }
   }
 

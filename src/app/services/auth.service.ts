@@ -9,7 +9,7 @@ import { TokensObj } from '../models/tokens';
   providedIn: "root"
 })
 export class AuthService {
-  TOKEN_KEY = "t";
+  TOKEN_KEY = "admin";
 
   apiUrl = environment.apiUrl;
 
@@ -17,9 +17,9 @@ export class AuthService {
 
   xClientInfoHeader = {
     appVersion: "1.0.0",
-    os: "iOS",
-    osVersion: "12.1",
-    device: "iPhone 7",
+    os: "macOS",
+    osVersion: "10.14.5",
+    device: "mac Mini",
     lang: "sv"
   };
 
