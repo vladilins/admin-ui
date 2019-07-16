@@ -72,6 +72,28 @@
 
       <label>
         <h4 class="bold">LADDA UPP BILD</h4>
+        <input
+          [class.error]="
+            imageControl.invalid &&
+            (imageControl.dirty || imageControl.touched || submitted)
+          "
+          class="form__input"
+          formControlName="image"
+          type="text"
+        />
+        <div
+          *ngIf="
+            imageControl.invalid &&
+            (imageControl.dirty || imageControl.touched || submitted)
+          "
+          class="form__error"
+        >
+          <p>Måste fyllas</p>
+        </div>
+      </label>
+
+      <!-- <label>
+        <h4 class="bold">LADDA UPP BILD</h4>
       </label>
       <div class="form__upload">
         <button (click)="openFileBrowser($event)" class="form__upload-btn">
@@ -86,16 +108,16 @@
           type="text"
           [value]="fileName ? fileName : ''"
         />
-      </div>
+      </div> -->
 
-      <input
+      <!-- <input
         formControlName="image"
         (change)="imageChange($event)"
         accept=".gif,.jpg,.jpeg,.png"
         id="imageBrowser"
         style="display: none;"
         type="file"
-      />
+      /> -->
 
       <h4 class="bold mt">VÄLJ PLACERING</h4>
 
