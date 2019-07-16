@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { Add } from "src/app/models/add";
 import { AdsService } from "src/app/services/ads.service";
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: "app-ads",
@@ -9,53 +10,10 @@ import { AdsService } from "src/app/services/ads.service";
 })
 export class AdsComponent implements OnInit {
   ads: Add[];
-  // ads = [
-  //   {
-  //     id: 1,
-  //     title: "rallyshop.se",
-  //     text: "25% rabbat på drifting däck",
-  //     link: "www.com",
-  //     image: "https://blog.hubspot.com/hubfs/subliminal-advertising.jpg",
-  //     place: 1
-  //   },
-  //   {
-  //     id: 1,
-  //     title: "rallyshop.se",
-  //     text: "25% rabbat på drifting däck",
-  //     link: "www.com",
-  //     image: "https://blog.hubspot.com/hubfs/subliminal-advertising.jpg",
-  //     place: 1
-  //   },
-  //   {
-  //     id: 1,
-  //     title: "rallyshop.se",
-  //     text: "25% rabbat på drifting däck",
-  //     link: "www.com",
-  //     image: "https://blog.hubspot.com/hubfs/subliminal-advertising.jpg",
-  //     place: 1
-  //   },
-  //   {
-  //     id: 1,
-  //     title: "rallyshop.se",
-  //     text: "25% rabbat på drifting däck",
-  //     link: "www.com",
-  //     image: "https://blog.hubspot.com/hubfs/subliminal-advertising.jpg",
-  //     place: 1
-  //   },
-  //   {
-  //     id: 1,
-  //     title: "rallyshop.se",
-  //     text: "25% rabbat på drifting däck",
-  //     link: "www.com",
-  //     image: "https://blog.hubspot.com/hubfs/subliminal-advertising.jpg",
-  //     place: 1
-  //   }
-  // ];
 
-  constructor(private adsService: AdsService) {}
+  constructor(private adsService: AdsService, private authService: AuthService) {}
 
   ngOnInit() {
-    // this.adsService.currentAds.subscribe(add => (this.ads = add));
     this.loadAds()
   }
 
@@ -66,6 +24,9 @@ export class AdsComponent implements OnInit {
       },
       error => {
         console.log(error);
+        if (error.status === 401) {
+          this.authService.logoutAndRedirect()
+        }
       }
     );
   }
