@@ -26,7 +26,7 @@ import { AdsService } from "src/app/services/ads.service";
 export class FormComponent implements OnInit {
   exists = false;
   submitted = false;
-
+  newAdd: boolean;
   add: Add;
 
   fileName;
@@ -45,7 +45,9 @@ export class FormComponent implements OnInit {
     this.form.controls["place"].setValue(this.default, { onlySelf: true });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.adsService.currentAdd.subscribe(add => (this.newAdd = add));
+  }
 
   get nameControl() {
     return this.form.get("title") as FormControl;
@@ -75,7 +77,8 @@ export class FormComponent implements OnInit {
     const input = <HTMLInputElement>document.getElementById("imageBrowser");
     input.addEventListener("change", () => {
       const title = input.value.split(/\\|\//).pop();
-      const truncated = title.length > 20 ? title.substr(title.length - 20) : title;
+      const truncated =
+        title.length > 20 ? title.substr(title.length - 20) : title;
 
       this.fileName = truncated;
     });
@@ -90,12 +93,16 @@ export class FormComponent implements OnInit {
   createAdd(form: FormGroup) {
     this.submitted = true;
     const { value, valid } = form;
-    this.add = value
+    this.add = value;
 
     if (valid) {
       this.adsService.newAdd(this.add).subscribe(
         data => {
           this.form.reset();
+          this.form.controls["place"].setValue(this.default, {
+            onlySelf: true
+          });
+          this.adsService.changeAdd(true);
           this.submitted = false;
         },
         error => {

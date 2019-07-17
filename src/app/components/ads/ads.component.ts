@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { Add } from "src/app/models/add";
 import { AdsService } from "src/app/services/ads.service";
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from "src/app/services/auth.service";
 
 @Component({
   selector: "app-ads",
@@ -10,11 +10,21 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class AdsComponent implements OnInit {
   ads: Add[];
+  newAdd: boolean;
 
-  constructor(private adsService: AdsService, private authService: AuthService) {}
+  constructor(
+    private adsService: AdsService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
-    this.loadAds()
+    this.loadAds();
+    this.adsService.currentAdd.subscribe(add => {
+      this.newAdd = add;
+      if (this.newAdd) {
+        this.loadAds();
+      }
+    });
   }
 
   private loadAds() {
@@ -25,7 +35,22 @@ export class AdsComponent implements OnInit {
       error => {
         console.log(error);
         if (error.status === 401) {
-          this.authService.logoutAndRedirect()
+          this.authService.logoutAndRedirect();
+        }
+      }
+    );
+  }
+
+  private deleteAdd(id: number) {
+    this.adsService.deleteAdd(id).subscribe(
+      data => {
+        console.log("deleted item:", id);
+        this.loadAds();
+      },
+      error => {
+        console.log(error);
+        if (error.status === 401) {
+          this.authService.logoutAndRedirect();
         }
       }
     );
