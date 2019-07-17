@@ -30,6 +30,8 @@ export class FormComponent implements OnInit {
   newAdd: boolean;
   add: Add;
 
+  linkReg =
+    "(http://www.|https://www.|http://|https://)?[a-z0-9]+([-.]{1}[a-z0-9]+)*.[a-z]{2,5}(:[0-9]{1,5})?(/.*)";
   fileName;
   places = [1, 2, 3, 4];
   default = 1;
@@ -37,8 +39,8 @@ export class FormComponent implements OnInit {
   form = this.fb.group({
     title: ["", Validators.required],
     text: ["", Validators.required],
-    url: ["", Validators.required],
-    imageUrl: [null, Validators.required],
+    url: ["", [Validators.required, Validators.pattern(this.linkReg)]],
+    imageUrl: [null, [Validators.required, Validators.pattern(this.linkReg)]],
     place: ["", Validators.required]
   });
 
