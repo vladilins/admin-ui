@@ -41,7 +41,7 @@ export class AdsComponent implements OnInit {
     );
   }
 
-  private deleteAdd(id: number) {
+  deleteAdd(id: number) {
     this.adsService.deleteAdd(id).subscribe(
       data => {
         console.log("deleted item:", id);

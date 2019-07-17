@@ -17,6 +17,7 @@ import {
 import { map } from "rxjs/operators";
 import { Add } from "src/app/models/add";
 import { AdsService } from "src/app/services/ads.service";
+import { AuthService } from "src/app/services/auth.service";
 
 @Component({
   selector: "app-form",
@@ -41,7 +42,11 @@ export class FormComponent implements OnInit {
     place: ["", Validators.required]
   });
 
-  constructor(private fb: FormBuilder, private adsService: AdsService) {
+  constructor(
+    private fb: FormBuilder,
+    private adsService: AdsService,
+    private authService: AuthService
+  ) {
     this.form.controls["place"].setValue(this.default, { onlySelf: true });
   }
 
@@ -107,6 +112,9 @@ export class FormComponent implements OnInit {
         },
         error => {
           console.log(error);
+          if (error.status === 401) {
+            this.authService.logoutAndRedirect();
+          }
         }
       );
     }
