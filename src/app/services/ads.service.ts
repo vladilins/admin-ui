@@ -13,9 +13,9 @@ export class AdsService {
 
   private xClientInfoHeader = {
     appVersion: "1.0.0",
-    os: "iOS",
-    osVersion: "12.1",
-    device: "iPhone 7",
+    os: "macOS",
+    osVersion: "10.14.5",
+    device: "mac Mini",
     lang: "sv"
   };
 
