@@ -4,4 +4,5 @@ export interface Add {
   text: string;
   title: string;
   url: string;
+  order: number;
 }

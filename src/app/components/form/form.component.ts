@@ -41,7 +41,7 @@ export class FormComponent implements OnInit {
     text: ["", Validators.required],
     url: ["", [Validators.required, Validators.pattern(this.linkReg)]],
     imageUrl: [null, [Validators.required, Validators.pattern(this.linkReg)]],
-    place: ["", Validators.required]
+    order: ["", Validators.required]
   });
 
   constructor(
@@ -49,7 +49,7 @@ export class FormComponent implements OnInit {
     private adsService: AdsService,
     private authService: AuthService
   ) {
-    this.form.controls["place"].setValue(this.default, { onlySelf: true });
+    this.form.controls["order"].setValue(this.default, { onlySelf: true });
   }
 
   ngOnInit(): void {
@@ -73,7 +73,7 @@ export class FormComponent implements OnInit {
   }
 
   get placeControl() {
-    return this.form.get("place") as FormControl;
+    return this.form.get("order") as FormControl;
   }
 
   openFileBrowser(event) {
@@ -101,12 +101,13 @@ export class FormComponent implements OnInit {
     this.submitted = true;
     const { value, valid } = form;
     this.add = value;
-
+    console.log(value);
+    
     if (valid) {
       this.adsService.newAdd(this.add).subscribe(
         data => {
           this.form.reset();
-          this.form.controls["place"].setValue(this.default, {
+          this.form.controls["order"].setValue(this.default, {
             onlySelf: true
           });
           this.adsService.changeAdd(true);
