@@ -100,9 +100,16 @@ export class FormComponent implements OnInit {
   createAdd(form: FormGroup) {
     this.submitted = true;
     const { value, valid } = form;
-    this.add = value;
-    console.log(value);
-    
+
+    this.add = {
+      title: form.value.title,
+      order: form.value.order - 1,
+      text: form.value.text,
+      url: form.value.url,
+      imageUrl: form.value.imageUrl,
+      id: 0
+    };
+
     if (valid) {
       this.adsService.newAdd(this.add).subscribe(
         data => {

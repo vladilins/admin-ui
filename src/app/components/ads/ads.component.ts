@@ -30,8 +30,6 @@ export class AdsComponent implements OnInit {
   private loadAds() {
     this.adsService.loadAds().subscribe(
       ads => {
-        console.log(ads);
-        
         this.ads = ads.advertisements;
       },
       error => {
