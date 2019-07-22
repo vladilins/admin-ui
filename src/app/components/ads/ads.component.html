@@ -15,8 +15,18 @@
         </div>
       </div>
       <div class="icons">
-        <img alt="moveUp" class="icon mr-r " src="assets/moveUp.png" />
-        <img alt="moveDown" class="mr-r icon" src="assets/moveDown.png" />
+        <img
+          alt="moveUp"
+          class="icon mr-r "
+          src="assets/moveUp.png"
+          (click)="moveDown(add)"
+        />
+        <img
+          alt="moveDown"
+          class="mr-r icon"
+          src="assets/moveDown.png"
+          (click)="moveUp(add)"
+        />
         <img
           alt="delete"
           class="icon"

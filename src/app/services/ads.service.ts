@@ -49,6 +49,12 @@ export class AdsService {
     return this.httpClient.post(endpoint, add, this.httpOptions);
   }
 
+  saveAdds(ads: Add[]) {
+    const endpoint = this.apiUrl + "/advertisements";
+
+    return this.httpClient.put(endpoint, ads, this.httpOptions);
+  }
+
   deleteAdd(id: number) {
     const endpoint = this.apiUrl + `/advertisements/${id}`;
 
