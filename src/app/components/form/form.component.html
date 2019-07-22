@@ -122,14 +122,27 @@
       <h4 class="bold mt">VÄLJ PLACERING</h4>
 
       <div class="form__submit">
-        <div class="select-style">
+        <!-- <div class="select-style">
           <select formControlName="order">
             <option *ngFor="let order of places" [ngValue]="order">
               {{ order }}
             </option>
           </select>
-        </div>
+        </div> -->
 
+        <div class="select-style">
+          <input
+            [class.error]="
+              placeControl.invalid &&
+              (placeControl.dirty || placeControl.touched || submitted)
+            "
+            class="form__input"
+            formControlName="order"
+            oninput="validity.valid||(value='');"
+            min="1"
+            type="number"
+          />
+        </div>
         <button type="submit" class="btn bold">
           PUBLICERA
         </button>
