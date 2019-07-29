@@ -1,20 +1,11 @@
-import {
-  Component,
-  Input,
-  Output,
-  OnChanges,
-  SimpleChanges,
-  OnInit
-} from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import {
   FormControl,
   FormGroup,
-  FormArray,
   FormBuilder,
   Validators
 } from "@angular/forms";
 
-import { map } from "rxjs/operators";
 import { Add } from "src/app/models/add";
 import { AdsService } from "src/app/services/ads.service";
 import { AuthService } from "src/app/services/auth.service";
@@ -27,7 +18,6 @@ import { AuthService } from "src/app/services/auth.service";
 export class FormComponent implements OnInit {
   exists = false;
   submitted = false;
-  newAdd: boolean;
   add: Add;
 
   linkReg =
@@ -35,12 +25,14 @@ export class FormComponent implements OnInit {
   fileName;
   places = [1, 2, 3, 4];
   default = 1;
+  formData: Add;
+  file : File
 
   form = this.fb.group({
     title: ["", Validators.required],
     text: ["", Validators.required],
     url: ["", [Validators.required, Validators.pattern(this.linkReg)]],
-    imageUrl: [null, [Validators.required, Validators.pattern(this.linkReg)]],
+    // imageUrl: [null, [Validators.required, Validators.pattern(this.linkReg)]],
     order: ["", Validators.required]
   });
 
@@ -48,12 +40,20 @@ export class FormComponent implements OnInit {
     private fb: FormBuilder,
     private adsService: AdsService,
     private authService: AuthService
-  ) {
-    this.form.controls["order"].setValue(this.default, { onlySelf: true });
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.adsService.currentAdd.subscribe(add => (this.newAdd = add));
+    this.adsService.currentForm.subscribe(form => {
+      this.formData = form;
+      if (this.formData) {
+        this.form.controls["title"].setValue(this.formData.title);
+        this.form.controls["text"].setValue(this.formData.text);
+        this.form.controls["url"].setValue(this.formData.url);
+        // this.form.controls["imageUrl"].setValue(this.formData.imageUrl);
+        this.form.controls["order"].setValue(this.formData.order + 1);
+        this.fileName = this.formData.imageUrl ? this.formData.imageUrl.replace(/^.*[\\\/]/, '') : this.formData.imageUrl
+      }
+    });
   }
 
   get nameControl() {
@@ -93,40 +93,70 @@ export class FormComponent implements OnInit {
   }
 
   imageChange(event) {
-    const fileList: FileList = event.target.files;
-    console.log(fileList[0]);
+    this.file = event.target.files[0];
   }
 
   createAdd(form: FormGroup) {
     this.submitted = true;
     const { value, valid } = form;
 
-    this.add = {
+    const add = {
       title: form.value.title,
       order: form.value.order - 1,
       text: form.value.text,
       url: form.value.url,
-      imageUrl: form.value.imageUrl,
-      id: 0
     };
-
+    
+    
+    
     if (valid) {
-      this.adsService.newAdd(this.add).subscribe(
-        data => {
-          this.form.reset();
-          this.form.controls["order"].setValue(this.default, {
-            onlySelf: true
-          });
-          this.adsService.changeAdd(true);
-          this.submitted = false;
-        },
-        error => {
-          console.log(error);
-          if (error.status === 401) {
-            this.authService.logoutAndRedirect();
-          }
+      if (this.formData !== null) {
+        
+        const addUpdate : Add = {
+          ...add,
+          imageUrl : this.formData.imageUrl,
+          _id: this.formData._id
+        };
+        if(this.file){
+          addUpdate.file = this.file
         }
-      );
+
+        
+        this.adsService.updateAdd(addUpdate, addUpdate._id).subscribe(
+          data => {
+            this.reset();
+            this.adsService.changeForm(null);
+          },
+          error => {
+            console.log(error);
+            if (error.status === 401) {
+              this.authService.logoutAndRedirect();
+            }
+          }
+        );
+      }
+      if (this.formData === null) {
+        console.log(add);
+        this.adsService.newAdd(add, this.file).subscribe(
+          data => {
+            this.reset();
+          },
+          error => {
+            console.log(error);
+            if (error.status === 401) {
+              this.authService.logoutAndRedirect();
+            }
+          }
+        );
+      }
     }
+  }
+
+  private reset() {
+    this.form.reset();
+    this.adsService.changeAdd(true);
+    this.submitted = false;
+    this.file = null;
+    this.fileName = null;
   }
 }

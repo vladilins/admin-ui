@@ -21,9 +21,15 @@ export class AdsService {
 
   private addSource = new BehaviorSubject(false);
   currentAdd = this.addSource.asObservable();
+  private formData = new BehaviorSubject(null);
+  currentForm = this.formData.asObservable();
 
   changeAdd(add: boolean) {
     this.addSource.next(add);
+  }
+
+  changeForm(form: Add) {
+    this.formData.next(form);
   }
 
   private httpOptions = {
@@ -38,27 +44,63 @@ export class AdsService {
   ) {}
 
   loadAds(): Observable<any> {
-    const endpoint = this.apiUrl + "/advertisements";
+    const endpoint = this.apiUrl + "/ads";
 
-    return this.httpClient.get<Add[]>(endpoint, this.httpOptions);
+    return this.httpClient.get<Add[]>(endpoint);
   }
 
-  newAdd(add: Add) {
-    const endpoint = this.apiUrl + "/advertisements";
+  newAdd(add: Add, file: File) {
+    const endpoint = this.apiUrl + "/ads";
 
-    return this.httpClient.post(endpoint, add, this.httpOptions);
+    const postData = new FormData();
+    postData.append('title', add.title)
+    postData.append('order', add.order.toString())
+    postData.append('text', add.text)
+    postData.append('url', add.url.toString())
+    postData.append("file", file, file.name);
+    console.log('text', add.text, 'title', add.title);
+    
+    console.log(postData);
+    
+    return this.httpClient.post(endpoint, postData);
   }
 
-  saveAdds(ads: Add[]) {
-    const endpoint = this.apiUrl + "/advertisements";
+  saveAds(ads: Add[]) {
+    const endpoint = this.apiUrl + "/ads";
 
-    return this.httpClient.put(endpoint, ads, this.httpOptions);
+    return this.httpClient.put(endpoint, ads);
+  }
+
+  updateAdd(add: Add, id: number) {
+    const endpoint = this.apiUrl + "/ads/" + id;
+    let postData: Add | FormData;
+    
+    if(add.file){
+      postData = new FormData();
+      postData.append('_id', add._id.toString())
+      postData.append('order', add.order.toString())
+      postData.append('text', add.text.toString())
+      postData.append('title', add.title.toString())
+      postData.append('url', add.url.toString())
+      postData.append("file", add.file, add.file.name);
+    } else {
+      postData = {
+        _id: add._id,
+        order: add.order,
+        text: add.text,
+        title: add.title,
+        url: add.url,
+        imageUrl: add.imageUrl
+      }
+    }
+
+    return this.httpClient.put(endpoint, postData);
   }
 
   deleteAdd(id: number) {
-    const endpoint = this.apiUrl + `/advertisements/${id}`;
+    const endpoint = this.apiUrl + `/ads/${id}`;
 
-    return this.httpClient.delete(endpoint, this.httpOptions);
+    return this.httpClient.delete<Add[]>(endpoint);
   }
 
   getAccessToken() {

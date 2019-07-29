@@ -1,8 +1,9 @@
 export interface Add {
-  id: number;
-  imageUrl: string;
+  _id?: number;
+  imageUrl?: string;
   text: string;
   title: string;
   url: string;
   order: number;
+  file?: File;
 }

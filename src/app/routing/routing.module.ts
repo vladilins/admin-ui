@@ -6,7 +6,7 @@ import { AuthGuard } from "../guards/auth.guard";
 import { NotFoundComponent } from "../components/not-found/not-found.component";
 
 const routes: Routes = [
-  { path: "admin", component: AdminComponent, canActivate: [AuthGuard] },
+  { path: "admin", component: AdminComponent },
   { path: "", redirectTo: "admin", pathMatch: "full" },
   { path: "login", component: LoginComponent },
   { path: "404", component: NotFoundComponent },

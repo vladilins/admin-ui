@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://sbf-dev-agent.frendsapp.com/api/v1',
+  apiUrl: "http://localhost:3000"
 };
 
 /*

@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from "@angular/core";
 import { Add } from "src/app/models/add";
 import { AdsService } from "src/app/services/ads.service";
 import { AuthService } from "src/app/services/auth.service";
-import { all } from "q";
 
 @Component({
   selector: "app-ads",
@@ -28,25 +27,10 @@ export class AdsComponent implements OnInit {
     });
   }
 
-  private loadAds() {
-    this.adsService.loadAds().subscribe(
-      ads => {
-        this.ads = ads.advertisements;
-      },
-      error => {
-        console.log(error);
-        if (error.status === 401) {
-          this.authService.logoutAndRedirect();
-        }
-      }
-    );
-  }
-
   deleteAdd(id: number) {
     this.adsService.deleteAdd(id).subscribe(
       data => {
-        console.log("deleted item:", id);
-        this.loadAds();
+        this.ads = data;
       },
       error => {
         console.log(error);
@@ -57,11 +41,15 @@ export class AdsComponent implements OnInit {
     );
   }
 
+  updateAdd(add: Add) {
+    this.adsService.changeForm(add);
+  }
+
   moveUp(add: Add) {
-    let found = this.ads.find(function(element) {
+    const found = this.ads.find(function(element) {
       return element.order === add.order;
     });
-    let foundNext = this.ads.find(function(element) {
+    const foundNext = this.ads.find(function(element) {
       return element.order === add.order - 1;
     });
     if (foundNext) {
@@ -71,7 +59,7 @@ export class AdsComponent implements OnInit {
       this.ads[found.order].order = found.order - 1;
       this.ads[foundNext.order].order = foundNext.order + 1;
 
-      this.adsService.saveAdds(this.ads).subscribe(
+      this.adsService.saveAds(this.ads).subscribe(
         data => {
           this.loadAds();
         },
@@ -86,10 +74,10 @@ export class AdsComponent implements OnInit {
   }
 
   moveDown(add: Add) {
-    let found = this.ads.find(function(element) {
+    const found = this.ads.find(function(element) {
       return element.order === add.order;
     });
-    let foundPrev = this.ads.find(function(element) {
+    const foundPrev = this.ads.find(function(element) {
       return element.order === add.order + 1;
     });
     if (foundPrev) {
@@ -98,7 +86,7 @@ export class AdsComponent implements OnInit {
       // this.ads[foundPrev.order] = b;
       this.ads[found.order].order = found.order + 1;
       this.ads[foundPrev.order].order = foundPrev.order - 1;
-      this.adsService.saveAdds(this.ads).subscribe(
+      this.adsService.saveAds(this.ads).subscribe(
         data => {
           this.loadAds();
         },
@@ -110,5 +98,19 @@ export class AdsComponent implements OnInit {
         }
       );
     }
+  }
+
+  private loadAds() {
+    this.adsService.loadAds().subscribe(
+      (ads: Add[]) => {
+        this.ads = ads;
+      },
+      error => {
+        console.log(error);
+        if (error.status === 401) {
+          this.authService.logoutAndRedirect();
+        }
+      }
+    );
   }
 }
