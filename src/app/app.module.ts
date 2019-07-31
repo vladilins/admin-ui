@@ -14,6 +14,7 @@ import { AppRoutingModule } from "./routing/routing.module";
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth.guard';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     LoginComponent,
     HeaderComponent,
     AdminComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { Router } from "@angular/router";
 import { map } from "rxjs/operators";
-import { TokensObj } from '../models/tokens';
+import { TokensObj } from "../models/tokens";
 
 @Injectable({
   providedIn: "root"
@@ -32,19 +32,34 @@ export class AuthService {
   constructor(private httpClient: HttpClient, private router: Router) {}
 
   login(username: string, password: string) {
-    const endpoint = this.apiUrl + "/user/auth/login";
+    const endpoint = this.apiUrl + "/login";
     const httpParams = {
-      name: username,
+      username: username,
       password: password
     };
 
-    return this.httpClient.post(endpoint, httpParams, this.httpOptions).pipe(
-      map(token => {
-        this.userToken = (token as TokensObj).tokens.access.token.toString();
-        this.storeToken();
-      })
-    );
+    return this.httpClient
+      .post<{ access_token: string }>(endpoint, httpParams)
+      .pipe(
+        map(token => {
+          this.userToken = token.access_token;
+          this.storeToken();
+        })
+      );
   }
+
+  register(username: string, password: string) {
+    const endpoint = this.apiUrl + "/register";
+    const httpParams = {
+      username: username,
+      password: password
+    };
+
+    return this.httpClient
+      .post(endpoint, httpParams)
+  }
+
+
 
   logoutAndRedirect() {
     this.logout();

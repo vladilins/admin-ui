@@ -3,7 +3,10 @@
     <div
         class="links">
         <a class="logo" [routerLink]="[ '/' ]">SBF</a>
-        <!-- <a [routerLink]="[ '/login' ]" class="link mr">Login</a> -->
+        <span *ngIf="!isLogedIn()">
+            <a [routerLink]="[ '/login' ]" class="link mr">Login</a>
+            <a [routerLink]="[ '/register' ]" class="link mr">Register</a>
+        </span>
         <a (click)="logout()" *ngIf="isLogedIn()" [routerLink]="[ '/' ]" class="link">Logout</a>
     </div>
 </nav>

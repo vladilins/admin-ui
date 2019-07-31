@@ -26,7 +26,7 @@ export class FormComponent implements OnInit {
   places = [1, 2, 3, 4];
   default = 1;
   formData: Add;
-  file : File
+  file: File;
 
   form = this.fb.group({
     title: ["", Validators.required],
@@ -51,7 +51,9 @@ export class FormComponent implements OnInit {
         this.form.controls["url"].setValue(this.formData.url);
         // this.form.controls["imageUrl"].setValue(this.formData.imageUrl);
         this.form.controls["order"].setValue(this.formData.order + 1);
-        this.fileName = this.formData.imageUrl ? this.formData.imageUrl.replace(/^.*[\\\/]/, '') : this.formData.imageUrl
+        this.fileName = this.formData.imageUrl
+          ? this.formData.imageUrl.replace(/^.*[\\\/]/, "")
+          : this.formData.imageUrl;
       }
     });
   }
@@ -104,24 +106,20 @@ export class FormComponent implements OnInit {
       title: form.value.title,
       order: form.value.order - 1,
       text: form.value.text,
-      url: form.value.url,
+      url: form.value.url
     };
-    
-    
-    
+
     if (valid) {
       if (this.formData !== null) {
-        
-        const addUpdate : Add = {
+        const addUpdate: Add = {
           ...add,
-          imageUrl : this.formData.imageUrl,
+          imageUrl: this.formData.imageUrl,
           _id: this.formData._id
         };
-        if(this.file){
-          addUpdate.file = this.file
+        if (this.file) {
+          addUpdate.file = this.file;
         }
 
-        
         this.adsService.updateAdd(addUpdate, addUpdate._id).subscribe(
           data => {
             this.reset();
@@ -136,7 +134,6 @@ export class FormComponent implements OnInit {
         );
       }
       if (this.formData === null) {
-        console.log(add);
         this.adsService.newAdd(add, this.file).subscribe(
           data => {
             this.reset();
