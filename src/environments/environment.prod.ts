@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://sbf-dev-agent.frendsapp.com/api/v1',
+  apiUrl: "http://adminapi-env.qpczvrz4kf.us-east-2.elasticbeanstalk.com"
 };
