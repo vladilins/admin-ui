@@ -1,10 +1,12 @@
 <div class="container">
   <!-- <h1 class="bold header">Lägg till ny kampanj</h1> -->
+  
+    <h1 class="login_header">Login</h1>
 
   <div class="form">
     <form (ngSubmit)="login(form)" [formGroup]="form">
       <label>
-        <h4 class="bold">Användarnamn</h4>
+        <h4 class="bold">Username</h4>
         <input
           [class.error]="usernameControl.invalid && submitted || error"
           class="form__input"
@@ -12,12 +14,12 @@
           type="text"
         />
         <div *ngIf="usernameControl.invalid && submitted" class="form__error">
-          <p>Användarnamn krävs</p>
+          <p>Username required</p>
         </div>
       </label>
 
       <label>
-        <h4 class="bold">Lösenord</h4>
+        <h4 class="bold">Password</h4>
         <input
           [class.error]="passwordControl.invalid && submitted || error"
           class="form__input"
@@ -25,17 +27,15 @@
           type="password"
         />
         <div *ngIf="passwordControl.invalid && submitted" class="form__error">
-          <p>Lösenord krävs</p>
+          <p>Password required</p>
         </div>
         <div *ngIf="error && !(passwordControl.invalid && submitted)" class="form__error">
-          <p>Fel lösenord eller användarnamn</p>
+          <p>Password invalid</p>
         </div>
       </label>
 
       <div class="form__submit">
-        <button class="btn " type="submit">
-          Logga in
-        </button>
+        <button class="btn " type="submit">Login</button>
       </div>
     </form>
   </div>

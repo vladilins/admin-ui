@@ -1,10 +1,10 @@
 <div class="container">
-  <h1 class="bold header">Lägg till ny kampanj</h1>
+  <h1 class="bold header">Add new campaign</h1>
 
   <div class="form">
     <form [formGroup]="form" (ngSubmit)="createAdd(form)">
       <label>
-        <h4 class="bold">Kampanj rubrik</h4>
+        <h4 class="bold">Campaign heading</h4>
         <input
           [class.error]="
             nameControl.invalid &&
@@ -21,7 +21,7 @@
           "
           class="form__error"
         >
-          <p>Måste fyllas</p>
+          <p>Must be filled</p>
         </div>
       </label>
 
@@ -44,12 +44,12 @@
           "
           class="form__error"
         >
-          <p>Måste fyllas</p>
+          <p>Must be filled</p>
         </div>
       </label>
 
       <label>
-        <h4 class="bold">Länk</h4>
+        <h4 class="bold">Link</h4>
         <input
           [class.error]="
             linkControl.invalid &&
@@ -66,7 +66,7 @@
           "
           class="form__error"
         >
-          <p>Länken är ogiltig</p>
+          <p>Invalid link</p>
         </div>
       </label>
 
@@ -93,7 +93,7 @@
       </label> -->
 
       <label>
-        <h4 class="bold">LADDA UPP BILD</h4>
+        <h4 class="bold">UPLOAD</h4>
       </label>
       <div class="form__upload">
         <button (click)="openFileBrowser($event)" class="form__upload-btn">
@@ -101,7 +101,7 @@
         </button>
         <input
           [class.error]="!fileName && submitted"
-          placeholder="Välj en fil"
+          placeholder="Select a file"
           class="form__input"
           id="imgName"
           readonly
@@ -119,7 +119,7 @@
         type="file"
       />
 
-      <h4 class="bold mt">VÄLJ PLACERING</h4>
+      <h4 class="bold mt">PLACING</h4>
 
       <div class="form__submit">
         <!-- <div class="select-style">
@@ -143,9 +143,7 @@
             type="number"
           />
         </div>
-        <button type="submit" class="btn bold">
-          PUBLICERA
-        </button>
+        <button type="submit" class="btn bold">PUBLISH</button>
       </div>
 
       <!-- <ng-content></ng-content> -->
